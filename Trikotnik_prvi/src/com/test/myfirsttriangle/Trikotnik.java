@@ -81,6 +81,7 @@ public class Trikotnik implements ApplicationListener {
         	          -0.5f, 0.5f, -0.5f, Color.toFloatBits(0, 0, 96, 255),
         	          -0.5f, -0.5f, -0.5f, Color.toFloatBits(0, 0, 96, 255) });
         	    }
+        	Gdx.gl.glEnable(GL10.GL_DEPTH_TEST);
         }
 
         @Override
@@ -100,6 +101,8 @@ public class Trikotnik implements ApplicationListener {
                 movementIncrement = -movementIncrement;
                 total = -200;
             }
+            Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+            Gdx.gl10.glAlphaFunc(GL10.GL_GREATER, 0);
             //camera.rotate(movementIncrement * 20, 0, 1, 0);
             //camera.translate(movementIncrement, 0, movementIncrement);
 
@@ -126,15 +129,9 @@ public class Trikotnik implements ApplicationListener {
             
             if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 camera.rotate(-rotationSpeed, 0, 0, 1);
-	        }
-	        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+	        }	        
+            if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 	                camera.rotate(rotationSpeed, 0, 0, 1);
-	        }
-	        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-                camera.rotate(rotationSpeed, 0, 1, 0);
-	        }
-	        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
-                camera.rotate(rotationSpeed, 0, -1, 0);
 	        }
 	        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 camera.rotate(rotationSpeed, 1, 0, 0);
@@ -142,10 +139,22 @@ public class Trikotnik implements ApplicationListener {
 	        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
                 camera.rotate(-rotationSpeed, 1, 0, 0);
 	        }
+	        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
+                camera.rotate(rotationSpeed, 0, 1, 0);
+	        }
+	        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+                camera.rotate(rotationSpeed, 0, -1, 0);
+	        }
+	        if(Gdx.input.isKeyPressed(Input.Keys.L)) {
+                camera.translate(0.1f,0 ,0);
+	        }
+	        if(Gdx.input.isKeyPressed(Input.Keys.R)) {
+                camera.translate(-0.1f,0 ,0);
+	        }
 	        if(Gdx.input.isKeyPressed(Input.Keys.O)) {
                 camera.zoom += 0.02;
 	        }
-	        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+	        if(Gdx.input.isKeyPressed(Input.Keys.Z)) {
                 camera.zoom-=0.02;
 	        }
     }
